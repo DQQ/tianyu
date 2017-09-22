@@ -1,20 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<web-app version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     
     <servlet>
         <servlet-name>AddStatsServlet</servlet-name>
         <servlet-class>com.tianyu.servlet.AddStatsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllStatsServlet</servlet-name>
+        <servlet-class>com.tianyu.servlet.AllStatsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditStatsServlet</servlet-name>
+        <servlet-class>com.tianyu.servlet.EditStatsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StatsServlet</servlet-name>
+        <servlet-class>com.tianyu.servlet.StatsServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
         <servlet-name>AddStatsServlet</servlet-name>
         <url-pattern>/servlet/addStatsServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllStatsServlet</servlet-name>
+        <url-pattern>/servlet/allStatsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditStatsServlet</servlet-name>
+        <url-pattern>/servlet/editStatsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatsServlet</servlet-name>
+        <url-pattern>/servlet/statsServlet</url-pattern>
+    </servlet-mapping>
     
     <welcome-file-list>
         <welcome-file>addstats.jsp</welcome-file>
     </welcome-file-list>
+
 </web-app>

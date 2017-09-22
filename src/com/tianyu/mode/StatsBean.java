@@ -3,7 +3,7 @@ package com.tianyu.mode;
 /**
  * Created by dongqingqing on 17/9/5.
  */
-public class AllStatsDataBean {
+public class StatsBean {
     private int id;
     private String time;
     private String groups;
@@ -11,9 +11,46 @@ public class AllStatsDataBean {
     private String result;
     private String developer;
     private String pd;
-    private String model;
+    private String apkversion;
     private String tester;
     private String reason;
+    private String apkplugs;
+    private String isrequirement;
+    private String isproducts;
+
+    public String getIsboning() {
+        return isboning;
+    }
+
+    public void setIsboning(String isboning) {
+        this.isboning = isboning;
+    }
+
+    public String getApkplugs() {
+        return apkplugs;
+    }
+
+    public void setApkplugs(String apkplugs) {
+        this.apkplugs = apkplugs;
+    }
+
+    public String getIsrequirement() {
+        return isrequirement;
+    }
+
+    public void setIsrequirement(String isrequirement) {
+        this.isrequirement = isrequirement;
+    }
+
+    public String getIsproducts() {
+        return isproducts;
+    }
+
+    public void setIsproducts(String isproducts) {
+        this.isproducts = isproducts;
+    }
+
+    private String isboning;
 
     public String getReason() {
         return reason;
@@ -79,12 +116,12 @@ public class AllStatsDataBean {
         this.pd = pd;
     }
 
-    public String getModel() {
-        return model;
+    public String getApkversion() {
+        return apkversion;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setApkversion(String model) {
+        this.apkversion = model;
     }
 
     public String getTester() {

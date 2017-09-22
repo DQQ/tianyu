@@ -91,7 +91,7 @@ function jsSelectitemByValue_index(objSelect, objitemText){
 
 function deletestat(id)
 {
-var url="http://10.20.224.140:8089/deletestats/" + id;
+var url="http://localhost:8080/tianyu/servlet/editStatsServlet?id=" + id;
 var ret = confirm("确认删除吗？");
 if (ret == true)
 {
@@ -153,7 +153,7 @@ function addCookie(name,value,expiredays){
 }
 
 function onchange_select(value){
-	var url = 'http://localhost:8080/tianyu/';
+	var url = 'http://localhost:8080/tianyu/servlet/allStatsServlet';
 	var dayfrom = document.getElementById('datetimepicker1');
 	var dayto = document.getElementById('datetimepicker2');
 	if (dayfrom == '' || dayto == ''){

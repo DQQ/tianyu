@@ -5,15 +5,21 @@
   Time: 09:57
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
-<%@ page import="com.tianyu.mode.AllStatsDataBean" %>
+<%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page import="java.util.*" %>
-<%@ page import="java.text.*" %>
-<% String time=new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());%>
-<html>
+<%
+  Object message = request.getAttribute("message");
+  if (message != null && !"".equals(message)) {
+%>
+<script type="text/javascript">
+  alert("<%=message%>");
+</script>
+<%} %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>添加提测信息</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>添加提测信息</title>
   <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
   <link href="/tianyu/static/css/buttons.css" rel="stylesheet" media="screen">
   <link href="/tianyu/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
@@ -74,9 +80,9 @@
     <div class="span12">
       <ul class="breadcrumb">
         <li>
-          <a href="http://10.20.220.57/access/index">返回数据平台</a> <span class="divider"></span>
+          <a href="#">返回测试平台</a> <span class="divider"></span>
         </li>
-        <li><a href="/stats/all/">查看提测合格率统计</a> <span class="divider"></span></li>
+        <li><a href="/tianyu/servlet/allStatsServlet">查看提测合格率统计</a> <span class="divider"></span></li>
       </ul>
     </div>
   </div>
@@ -101,18 +107,11 @@
         <label for="group" class="col-sm-2 control-label">小组*</label>
         <div class="dropdown col-sm-10" style="position: relative;width: 200px;">
           <select class="form-control" id="group" name="group">
-            <option value ="毒霸桌面产品组">毒霸桌面产品组</option>
             <option value="CMS">CMS</option>
             <option value="CM">CM</option>
-            <option value="电池医生">电池医生</option>
-            <option value ="防御组">防御组</option>
-            <option value="游戏会员功能">游戏会员功能</option>
-            <option value="商推功能">商推功能</option>
-            <option value="导航">导航</option>
-            <option value="猎豹浏览器">猎豹浏览器</option>
-            <option value="装机联盟">装机联盟</option>
-            <option value="猎豹wifi">猎豹wifi</option>
-            <option value="手助+市场">手助+市场</option>
+            <option value="CMB">CMB</option>
+            <option value ="xcamera">Master相机</option>
+            <option value="heytime">好时光</option>
           </select>
         </div>
       </div>
@@ -125,9 +124,16 @@
       </div>
 
       <div class="form-group">
-        <label for="model" class="col-sm-2 control-label">所属模块(选填)</label>
+        <label for="apkversion" class="col-sm-2 control-label">版本号</label>
         <div class="col-sm-10">
-          <input class="form-control" id="model" type="text" name="model" style="position: relative;width: 300px;">
+          <input class="form-control" id="apkversion" type="text" name="apkversion" style="position: relative;width: 300px;">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="apkplugs" class="col-sm-2 control-label">对应插件</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" id="apkplugs" type="text" name="apkplugs" style="position: relative;width: 300px;"></textarea>
         </div>
       </div>
 
@@ -153,11 +159,41 @@
       </div>
 
       <div class="form-group">
+        <label for="isrequirement" class="col-sm-2 control-label">是否需求评审*</label>
+        <div class="dropdown col-sm-10" style="position: relative;width: 180px;">
+          <select class="form-control" id="isrequirement" name="isrequirement">
+            <option value ="是">是</option>
+            <option value ="否">否</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="isproducts" class="col-sm-2 control-label">是否产品体验*</label>
+        <div class="dropdown col-sm-10" style="position: relative;width: 180px;">
+          <select class="form-control" id="isproducts" name="isproducts">
+            <option value ="是">是</option>
+            <option value ="否">否</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="isboning" class="col-sm-2 control-label">是否临时需求*</label>
+        <div class="dropdown col-sm-10" style="position: relative;width: 180px;">
+          <select class="form-control" id="isboning" name="isboning">
+            <option value ="否">否</option>
+            <option value ="是">是</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
         <label for="ispass" class="col-sm-2 control-label">是否合格*</label>
         <div class="dropdown col-sm-10" style="position: relative;width: 180px;">
           <select class="form-control" id="ispass" name="ispass">
             <option value ="是">是</option>
-            <option value ="待审核">否（待审核）</option>
+            <option value ="否">否</option>
           </select>
         </div>
       </div>
@@ -176,14 +212,13 @@
         </div>
       </div>
     </form>
-
   </div>
 </div>
 </body>
 <script type="text/javascript">
   $("#ispass").change(function(){
     var select_value=$("#ispass").val();
-    if(select_value == "待审核"){
+    if(select_value == "否"){
       $("#myModal").modal();
     }
   });
